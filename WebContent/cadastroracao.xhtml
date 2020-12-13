@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+
+		<h:messages errorStyle="color:red" warnStyle="color:orange"
+			infoStyle="color:green" globalOnly="false" />
+
+		<!-- Container -->
+		<div class="container-fluid">
+			<div class="row justify-content-md-center">
+				<div class="col-md-6 col-md-auto login-box">
+			
+					<div class="form-row">
+					    <div class="form-group col-md-2">
+					    </div>	
+						<div class="form-group col-md-10">
+							<h1 class="text-center wdi-red">Cadastro de Ração</h1>
+						</div>
+					</div> 
+					<hr />
+					<h:form>
+						<div class="form-group">
+							<h:outputLabel value="Marca:" />
+							<h:inputText 
+								class="form-control"
+								value="#{racaoController.entity.marca}" />
+						</div>
+					
+						<div class="form-group">
+							<h:outputLabel value="Porte do animal" />
+					      	<h:selectOneMenu styleClass="form-control" 
+								value="#{racaoController.entity.animal.porte}">
+								<f:selectItems value="#{racaoController.listaPorte}" 
+											   var="obj"
+											   itemLabel="#{obj.label}"/>                  
+							</h:selectOneMenu>
+						</div>
+						
+						<div class="form-group">
+							<h:outputLabel value="Espécie do animal:" />
+					      	<h:selectOneMenu styleClass="form-control" 
+								value="#{racaoController.entity.animal.categoria}">
+								<f:selectItems value="#{racaoController.listaCategoria}" 
+											   var="obj"
+											   itemLabel="#{obj.label}"/>                  
+							</h:selectOneMenu>
+						</div>
+						
+						<div class="form-group">
+							<h:outputLabel value="Faixa Etária:" />
+					      	<h:selectOneMenu styleClass="form-control" 
+								value="#{racaoController.entity.faixaetaria}">
+								<f:selectItems value="#{racaoController.listaFaixaEtaria}" 
+											   var="obj"
+											   itemLabel="#{obj.label}"/>                  
+							</h:selectOneMenu>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<h:outputLabel value="Peso" />
+								<h:inputText 
+									class="form-control"
+									value="#{racaoController.entity.peso}" />
+							</div>
+							
+							<div class="form-group col-md-6">
+								<h:outputLabel value="Preço:" />
+								<h:inputText 
+									class="form-control"
+									value="#{racaoController.entity.preco}" />
+							</div>
+							
+							<div class="form-group col-md-6">
+								<h:outputLabel value="Estoque" />
+								<h:inputText 
+									class="form-control"
+									value="#{racaoController.entity.estoque}" />
+							</div>
+							
+							<div class="form-group col-md-6">
+								<h:outputLabel value="Validade:" />
+								<h:inputText 
+									converterMessage="Erro ao converter a data"
+									class="form-control"
+									value="#{racaoController.entity.dataValidade}" >
+									<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+							</h:inputText>
+									
+							</div>
+							<div class="form-group col-md-6">
+								<h:outputLabel value="Foto:" />
+								<h:inputText value="#{racaoController.entity.foto}" 
+									class="form-control"/>
+							</div>
+						</div>
+						<div class="row">
+						    <div class="form-group col-md-3">
+								<h:commandButton value="Incluir" style="width:100px"
+									class="btn btn-outline-primary"
+									disabled="#{racaoController.entity.id != null}"
+									actionListener="#{racaoController.incluir}" />    
+						    </div>
+						    <div class="form-group col-md-3">
+							    <h:commandButton value="Alterar" style="width:100px"
+									class="btn btn-outline-primary"
+									disabled="#{racaoController.entity.id == null}"
+									actionListener="#{racaoController.alterar}" />
+						    </div>
+						    <div class="form-group col-md-3">
+							    <h:commandButton value="Excluir" style="width:100px"
+									class="btn btn-outline-danger"
+									disabled="#{racaoController.entity.id == null}"
+									actionListener="#{racaoController.remover}" >
+									<f:ajax execute="@this" render="@form formDataTable"/>
+								</h:commandButton>
+						    </div>
+						    <div class="form-group col-md-3">
+						    	<h:commandButton value="Limpar" style="width:100px"
+									class="btn btn-outline-primary"
+									actionListener="#{racaoController.limpar}">
+									<f:ajax execute="@this" render="@form"/>
+								</h:commandButton>
+						    </div>
+						</div>
+					</h:form>
+					
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
