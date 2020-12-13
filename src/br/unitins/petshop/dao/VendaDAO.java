@@ -151,7 +151,7 @@ public class VendaDAO implements DAO<Venda> {
 				itemVenda.setId(rs.getInt("id"));
 				itemVenda.setPreco(rs.getDouble("preco"));
 				RacaoDAO dao = new RacaoDAO();
-				itemVenda.setProduto(dao.obterUm(new Racao(rs.getInt("id_produto"))));
+				//itemVenda.setProduto(dao.obterUm(new Racao(rs.getInt("id_produto"))));
 
 				listaItemVenda.add(itemVenda);
 			}
